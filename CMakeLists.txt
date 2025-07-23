@@ -23,7 +23,7 @@ endif()
 
 # Our Project
 
-add_executable(${PROJECT_NAME} main.cpp)
+add_executable(${PROJECT_NAME} main.cpp src/entity.cpp src/player.cpp)
 target_include_directories(${PROJECT_NAME} PRIVATE inc)
 #set(raylib_VERBOSE 1)
 
