@@ -7,6 +7,10 @@ Entity::Entity(int x, int y, int w, int h) {
     height = h;
 }
 
+Entity::~Entity() {
+    UnloadTexture(texture);
+}
+
 void Entity::loadTexture(char* filePath) {
     texture = LoadTexture(filePath);
 }

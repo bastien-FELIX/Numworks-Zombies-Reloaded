@@ -2,6 +2,7 @@
 
 #include "inc/entity.h"
 #include "inc/player.h"
+#include "inc/weapon.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
@@ -13,10 +14,12 @@ int main(void)
 {
     // Initialization
 
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Numworks Zobmies Reloaded");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Numworks Zmbies Reloaded");
     SetTargetFPS(60);
 
     Player* p = new Player(50, 50);
+    Weapon* w = new Weapon("gex", "../assets/sprites/shotgun.png");
+    p->setWeapon(w);
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
@@ -26,6 +29,7 @@ int main(void)
 
         p->display();
         p->movement();
+        p->displayWeapon();
 
         EndDrawing();
     }
