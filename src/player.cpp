@@ -27,3 +27,15 @@ void Player::setWeapon(Weapon* w) {
 void Player::displayWeapon() {
     currentWeapon->display(this);
 }
+
+void Player::shoot() {
+    bulletList.push_back(new Bullet(this->getPosX() + 20, this->getPosY() + 20, currentWeapon->getRotation()));
+    currentWeapon->playShoot();
+}
+
+void Player::refreshAllBullets() {
+    for (int i = 0; i < bulletList.size(); i++) {
+        bulletList[i]->move();
+        bulletList[i]->display();
+    }
+}

@@ -1,24 +1,21 @@
 #include "raylib.h"
 
-#include "inc/entity.h"
 #include "inc/player.h"
 #include "inc/weapon.h"
+#include "inc/bullet.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
-//------------------------------------------------------------------------------------
-// Program main entry point
-//------------------------------------------------------------------------------------
+
 int main(void)
 {
-    // Initialization
-
-    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Numworks Zmbies Reloaded");
+    InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Numworks Zombies Reloaded");
+    InitAudioDevice();
     SetTargetFPS(60);
 
     Player* p = new Player(50, 50);
-    Weapon* w = new Weapon("gex", "../assets/sprites/shotgun.png");
+    Weapon* w = new Weapon("gex", "../assets/sprites/shotgun.png", "../assets/sfx/shotgun/shotgun_reload.wav", "../assets/sfx/shotgun/shotgun_rakk.wav", "../assets/sfx/shotgun/shotgun_shoot.wav");
     p->setWeapon(w);
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -30,6 +27,11 @@ int main(void)
         p->display();
         p->movement();
         p->displayWeapon();
+        p->refreshAllBullets();
+
+        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+            p->shoot();
+        }
 
         EndDrawing();
     }
