@@ -9,6 +9,8 @@ Weapon::Weapon(char* name, char* spritePath, char* reloadPath, char* rakkPath, c
     reload = LoadSound(reloadPath);
     rakk = LoadSound(rakkPath);
     shoot = LoadSound(shootPath);
+
+    damage = 0;
 }
 
 void Weapon::loadTexture(char* filePath) {

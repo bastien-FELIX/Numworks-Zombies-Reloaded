@@ -4,6 +4,7 @@ Player::Player(int x, int y) : Entity(x, y, 36, 54) {
     loadTexture("../assets/sprites/player.png");
 
     currentWeapon = nullptr;
+    score = 0;
 }
 
 void Player::movement() {
@@ -33,9 +34,21 @@ void Player::shoot() {
     currentWeapon->playShoot();
 }
 
-void Player::refreshAllBullets() {
+void Player::displayScore() {
+    DrawText(TextFormat("Score : %i", score), 0, 0, 30, RED);
+}
+
+void Player::refreshAllBullets(std::vector<Zombie*> zList) {
     for (int i = 0; i < bulletList.size(); i++) {
         bulletList[i]->move();
         bulletList[i]->display();
+
+        for (int j = 0; j < zList.size(); j++) {
+            if (bulletList[i]->isCollided(zList[j]) && zList[j]->getHealth() > 0) {
+                score++;
+
+                zList[j]->takeDamage(1);
+            }
+        }
     }
 }

@@ -28,5 +28,18 @@ void Entity::changePos(int deltaX, int deltaY) {
     posY += deltaY;
 }
 
-// bool isCollided(int x, int y, int w, int y);
-// bool isCollided(Entity* e);
+bool Entity::isCollided(int x, int y, int w, int h) {
+    Rectangle thisRect = { posX, posY, width, height };
+    Rectangle theOtherOne = { x, y, w, h };
+
+    // too lazy to make my own
+    if (CheckCollisionRecs(thisRect, theOtherOne)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+bool Entity::isCollided(Entity* e) {
+    return isCollided(e->getPosX(), e->getPosY(), e->getWidth(), e->getHeight());
+}

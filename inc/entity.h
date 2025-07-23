@@ -24,8 +24,8 @@ public:
 
     void changePos(int deltaX, int deltaY);
 
-    // bool isCollided(int x, int y, int w, int y);
-    // bool isCollided(Entity* e);
+    bool isCollided(int x, int y, int w, int h);
+    bool isCollided(Entity* e);
 };
 
 #endif

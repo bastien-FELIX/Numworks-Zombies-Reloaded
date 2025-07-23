@@ -14,6 +14,8 @@ private:
     Sound shoot;
     Sound rakk;
 
+    int damage;
+
 public:
     Weapon(char* name, char* spritePath, char* reloadPath, char* rakkPath, char* shootPath);
 
