@@ -24,7 +24,7 @@ int main(void)
     ZombieList* zl = new ZombieList();
     zl->spawnZombie();
 
-    Music bg_music = LoadMusicStream("../assets/ost/bg_music.mp3");
+    Music bg_music = LoadMusicStream("../assets/ost/bg_music.ogg");
 
     short gameStarted = -1; // -1 is not started yet, 0 is over, 1 is in game
 
