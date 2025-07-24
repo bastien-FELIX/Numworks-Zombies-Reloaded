@@ -50,5 +50,11 @@ void Player::refreshAllBullets(std::vector<Zombie*> zList) {
                 zList[j]->takeDamage(1);
             }
         }
+
+        if (bulletList[i]->getPosX() + bulletList[i]->getWidth() < 0 || bulletList[i]->getPosX() > GetScreenWidth() || bulletList[i]->getPosY() + bulletList[i]->getHeight() < 0 || bulletList[i]->getPosY() > GetScreenHeight()) {
+            bulletList.erase(bulletList.begin() + i);
+        }
     }
+
+    DrawText(TextFormat("%i", bulletList.size()), 0, 150, 30, RED);
 }

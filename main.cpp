@@ -5,11 +5,10 @@
 #include "inc/weapon.h"
 #include "inc/bullet.h"
 #include "inc/zombie.h"
+#include "inc/zombieList.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
-
-std::vector<Zombie*> zombieList;
 
 int main(void)
 {
@@ -21,9 +20,8 @@ int main(void)
     Weapon* w = new Weapon("gex", "../assets/sprites/shotgun.png", "../assets/sfx/shotgun/shotgun_reload.wav", "../assets/sfx/shotgun/shotgun_rakk.wav", "../assets/sfx/shotgun/shotgun_shoot.wav");
     p->setWeapon(w);
 
-    for (int i = 0; i < 15; i++) {
-        zombieList.push_back(new Zombie());
-    }
+    ZombieList* zl = new ZombieList();
+    zl->spawnZombie();
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
@@ -35,15 +33,15 @@ int main(void)
         p->movement();
         p->displayWeapon();
         p->displayScore();
-        p->refreshAllBullets(zombieList);
+        p->refreshAllBullets(zl->getZList());
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
             p->shoot();
         }
 
-        for (int i = 0; i < zombieList.size(); i++) {
-            zombieList[i]->display();
-        }
+        zl->checkDeadAll();
+        zl->pathFindAll(p);
+        zl->displayAll();
 
         EndDrawing();
     }
