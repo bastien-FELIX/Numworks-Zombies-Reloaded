@@ -40,10 +40,9 @@ void Player::displayScore() {
 }
 
 void Player::displayHealth() {
-    DrawRectangle(5, 5, 200, 35, BLACK);            // border
-    DrawRectangle(8, 8, 194, 29, { 169, 50, 38, 255 });            // background
-    DrawRectangle(8, 8, 193 * health/100, 28, GREEN); // health bar
-    DrawRectangle(8, 8+28, 194 * health/100, 1, { 169, 50, 38, 255 });
+    DrawRectangle(5, 5, 200, 35, BLACK);                                // border
+    DrawRectangle(8, 8, 194, 29, { 169, 50, 38, 255 });                 // background
+    DrawRectangle(8, 8, 193 * health/100, 28, GREEN);                   // health bar
 }
 
 void Player::isDamaged(std::vector<Zombie*> zList) {

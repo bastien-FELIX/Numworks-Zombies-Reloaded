@@ -6,13 +6,10 @@
 #include "inc/bullet.h"
 #include "inc/zombie.h"
 #include "inc/zombieList.h"
+#include "inc/menus.h"
 
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
-
-#ifndef _DEBUG
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
-#endif 
 
 int main(void)
 {
@@ -20,7 +17,7 @@ int main(void)
     InitAudioDevice();
     SetTargetFPS(60);
 
-    Player* p = new Player(50, 50);
+    Player* p = new Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
     Weapon* w = new Weapon("gex", "../assets/sprites/shotgun.png", "../assets/sfx/shotgun/shotgun_reload.wav", "../assets/sfx/shotgun/shotgun_rakk.wav", "../assets/sfx/shotgun/shotgun_shoot.wav");
     p->setWeapon(w);
 
@@ -31,28 +28,63 @@ int main(void)
 
     PlayMusicStream(bg_music);
 
+    short gameStarted = -1; // -1 is not started yet, 0 is over, 1 is in game
+
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        // UpdateMusicStream(bg_music);
+        UpdateMusicStream(bg_music);
 
         BeginDrawing();
 
-        ClearBackground(WHITE);
+        switch (gameStarted) {
+            case -1:
+                startMenu();
 
-        p->display();
-        p->movement();
-        p->displayWeapon();
-        p->displayScore();
-        p->displayHealth();
-        p->refreshAllBullets(zl->getZList());
+                if (IsKeyPressed(KEY_SPACE)) {
+                    gameStarted = 1;
+                }
 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            p->shoot();
+                break;
+
+            case 0:
+                deadMenu(p->getScore());
+
+                if (IsKeyPressed(KEY_SPACE)) {
+                    p = new Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
+                    p->setWeapon(w);
+
+                    zl = new ZombieList();
+                    zl->spawnZombie();
+
+                    gameStarted = 1;
+                }
+
+                break;
+
+            case 1:
+                ClearBackground(WHITE);
+
+                p->display();
+                p->movement();
+                p->displayWeapon();
+                p->displayScore();
+                p->displayHealth();
+                p->refreshAllBullets(zl->getZList());
+
+                if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+                    p->shoot();
+                }
+
+                zl->checkDeadAll();
+                zl->pathFindAll(p);
+                zl->displayAll();
+
+                if (p->getHealth() <= 0) {
+                    gameStarted = 0;
+                }
+
+                break;
         }
-
-        zl->checkDeadAll();
-        zl->pathFindAll(p);
-        zl->displayAll();
 
         EndDrawing();
     }

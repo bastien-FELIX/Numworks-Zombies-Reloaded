@@ -29,6 +29,7 @@ public:
     void displayHealth(); // shows a bar, and not some lazy ass text
 
     int getHealth() { return health; }
+    int getScore() { return score; }
     void isDamaged(std::vector<Zombie*> zList);
     void refreshAllBullets(std::vector<Zombie*> zList); // moves, display and test collision (net yet)
 };
