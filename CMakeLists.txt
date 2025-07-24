@@ -27,6 +27,8 @@ add_executable(${PROJECT_NAME} main.cpp src/entity.cpp src/player.cpp src/weapon
 target_include_directories(${PROJECT_NAME} PRIVATE inc)
 #set(raylib_VERBOSE 1)
 
+set(CMAKE_EXE_LINKER_FLAGS "-Wl,--subsystem,windows")
+
 target_link_libraries(${PROJECT_NAME} raylib)
 
 # Web Configurations
