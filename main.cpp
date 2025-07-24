@@ -26,8 +26,6 @@ int main(void)
 
     Music bg_music = LoadMusicStream("../assets/ost/bg_music.mp3");
 
-    PlayMusicStream(bg_music);
-
     short gameStarted = -1; // -1 is not started yet, 0 is over, 1 is in game
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
@@ -42,6 +40,7 @@ int main(void)
 
                 if (IsKeyPressed(KEY_SPACE)) {
                     gameStarted = 1;
+                    PlayMusicStream(bg_music);
                 }
 
                 break;
@@ -57,6 +56,8 @@ int main(void)
                     zl->spawnZombie();
 
                     gameStarted = 1;
+
+                    PlayMusicStream(bg_music);
                 }
 
                 break;
@@ -81,6 +82,7 @@ int main(void)
 
                 if (p->getHealth() <= 0) {
                     gameStarted = 0;
+                    StopMusicStream(bg_music);
                 }
 
                 break;
