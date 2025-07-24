@@ -23,8 +23,14 @@ int main(void)
     ZombieList* zl = new ZombieList();
     zl->spawnZombie();
 
+    Music bg_music = LoadMusicStream("../assets/ost/bg_music.mp3");
+
+    PlayMusicStream(bg_music);
+
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
+        UpdateMusicStream(bg_music);
+
         BeginDrawing();
 
         ClearBackground(WHITE);
@@ -45,6 +51,8 @@ int main(void)
 
         EndDrawing();
     }
+
+    UnloadMusicStream(bg_music);
 
     // De-Initialization
     //--------------------------------------------------------------------------------------
