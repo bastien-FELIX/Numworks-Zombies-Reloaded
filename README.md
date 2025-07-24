@@ -25,4 +25,4 @@ White background. Rambo looking tic-tac. Enemies are green tic-tac. Score is jus
 
 ### Easily modable
 You can change every 4 sprites of the game, but make sure they are not the right size format, so they'll look like shit.
-You can also change the totally legally obtained background music to anything you like. Have fun playing with baby shark in the background for maximum ear bleeding!
+You can also change the totally original background music (fr it is) to anything you like. Have fun playing with baby shark in the background for maximum ear bleeding!
