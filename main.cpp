@@ -10,6 +10,10 @@
 #define SCREEN_WIDTH 1280
 #define SCREEN_HEIGHT 720
 
+#ifndef _DEBUG
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
+#endif 
+
 int main(void)
 {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Numworks Zombies Reloaded");
@@ -29,7 +33,7 @@ int main(void)
 
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        UpdateMusicStream(bg_music);
+        // UpdateMusicStream(bg_music);
 
         BeginDrawing();
 
@@ -39,6 +43,7 @@ int main(void)
         p->movement();
         p->displayWeapon();
         p->displayScore();
+        p->displayHealth();
         p->refreshAllBullets(zl->getZList());
 
         if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {

@@ -59,6 +59,7 @@ void ZombieList::checkDeadAll() {
         if (zList[i]->isDead()) {
             zList.erase(zList.begin() + i);
             
+            difficulty++;
             spawnZombie();
         }
     }

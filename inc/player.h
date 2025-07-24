@@ -22,9 +22,11 @@ public:
 
     void movement();
     void setWeapon(Weapon* w);
-    void displayWeapon();
     void shoot();
+
+    void displayWeapon();
     void displayScore();
+    void displayHealth(); // shows a bar, and not some lazy ass text
 
     int getHealth() { return health; }
     void isDamaged(std::vector<Zombie*> zList);

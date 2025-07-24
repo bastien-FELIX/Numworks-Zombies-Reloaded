@@ -10,14 +10,14 @@ private:
     char* name;
     char* texturePath;
 
-    Sound reload;
     Sound shoot;
-    Sound rakk;
+    // Sound rakk;
 
     int damage;
 
 public:
     Weapon(char* name, char* spritePath, char* reloadPath, char* rakkPath, char* shootPath);
+    ~Weapon();
 
     void loadTexture(char* filePath);
     void display(Entity* e);

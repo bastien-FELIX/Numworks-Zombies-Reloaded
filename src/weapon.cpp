@@ -6,11 +6,16 @@ Weapon::Weapon(char* name, char* spritePath, char* reloadPath, char* rakkPath, c
     loadTexture(spritePath);
     rotation = 0;
 
-    reload = LoadSound(reloadPath);
-    rakk = LoadSound(rakkPath);
+    // rakk = LoadSound(rakkPath);
     shoot = LoadSound(shootPath);
 
     damage = 0;
+}
+
+Weapon::~Weapon() {
+    UnloadSound(shoot);
+    delete(name);
+    delete(texturePath);
 }
 
 void Weapon::loadTexture(char* filePath) {

@@ -36,7 +36,14 @@ void Player::shoot() {
 }
 
 void Player::displayScore() {
-    DrawText(TextFormat("Score : %i", score), 0, 0, 30, RED);
+    DrawText(TextFormat("Score : %i", score), 5, 40, 30, BLACK);
+}
+
+void Player::displayHealth() {
+    DrawRectangle(5, 5, 200, 35, BLACK);            // border
+    DrawRectangle(8, 8, 194, 29, { 169, 50, 38, 255 });            // background
+    DrawRectangle(8, 8, 193 * health/100, 28, GREEN); // health bar
+    DrawRectangle(8, 8+28, 194 * health/100, 1, { 169, 50, 38, 255 });
 }
 
 void Player::isDamaged(std::vector<Zombie*> zList) {
@@ -48,13 +55,11 @@ void Player::isDamaged(std::vector<Zombie*> zList) {
         }
     }
 
-    health += 0.2;
+    health += 0.1;
 
     if (health > 100) {
         health = 100;
     }
-
-    DrawText(TextFormat("%i", (int)health), 0, 150, 30, RED);
 }
 
 void Player::refreshAllBullets(std::vector<Zombie*> zList) {
@@ -65,6 +70,10 @@ void Player::refreshAllBullets(std::vector<Zombie*> zList) {
         for (int j = 0; j < zList.size(); j++) {
             if (bulletList[i]->isCollided(zList[j]) && zList[j]->getHealth() > 0) {
                 score++;
+
+                if (zList[i]->isDead()) {
+                    score += 10;
+                }
 
                 zList[j]->takeDamage(1);
             }
