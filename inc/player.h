@@ -15,6 +15,7 @@ private:
     std::vector<Bullet*> bulletList;
 
     int score;
+    float health;
 
 public:
     Player(int x, int y);
@@ -25,6 +26,8 @@ public:
     void shoot();
     void displayScore();
 
+    int getHealth() { return health; }
+    void isDamaged(std::vector<Zombie*> zList);
     void refreshAllBullets(std::vector<Zombie*> zList); // moves, display and test collision (net yet)
 };
 

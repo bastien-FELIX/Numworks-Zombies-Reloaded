@@ -5,6 +5,7 @@ Player::Player(int x, int y) : Entity(x, y, 36, 54) {
 
     currentWeapon = nullptr;
     score = 0;
+    health = 100.0;
 }
 
 void Player::movement() {
@@ -38,6 +39,24 @@ void Player::displayScore() {
     DrawText(TextFormat("Score : %i", score), 0, 0, 30, RED);
 }
 
+void Player::isDamaged(std::vector<Zombie*> zList) {
+    for (int j = 0; j < zList.size(); j++) {
+        if (isCollided(zList[j])) {
+            if (health > 0) {
+                health--;
+            }
+        }
+    }
+
+    health += 0.2;
+
+    if (health > 100) {
+        health = 100;
+    }
+
+    DrawText(TextFormat("%i", (int)health), 0, 150, 30, RED);
+}
+
 void Player::refreshAllBullets(std::vector<Zombie*> zList) {
     for (int i = 0; i < bulletList.size(); i++) {
         bulletList[i]->move();
@@ -56,5 +75,5 @@ void Player::refreshAllBullets(std::vector<Zombie*> zList) {
         }
     }
 
-    DrawText(TextFormat("%i", bulletList.size()), 0, 150, 30, RED);
+    isDamaged(zList);
 }
