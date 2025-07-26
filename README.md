@@ -1,5 +1,8 @@
 # Numworks-Zombies-Reloaded
-A recreation of the Numworks Zombies game a made for the Numworks calculator
+A recreation of the Numworks Zombies game a made for the Numworks calculator, using C++ and the Raylib library.
+
+Here is [Raylib's website](https://https://www.raylib.com/) and 
+[Raylib's GitHub](https://github.com/raysan5/raylib), there have been cool games made with it. But this is not one of them.
 
 ## Features
 
